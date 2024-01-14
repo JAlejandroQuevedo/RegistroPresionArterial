@@ -1,0 +1,123 @@
+:root{
+    --background: #535050;
+    --color: black;
+    --back-div: #C9C7C7;
+    --back-div-form: #8D7878;
+    --label-inputs: #5F5B5B;
+    --color-in-label: #FFFFFF
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:var(--background);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.25rem;
+    color: var(--color);
+    margin: 30px;
+}
+.container{
+    background-color: var(--back-div);
+    width: fit-content;
+    height: fit-content;
+    border-radius: .625rem;
+    max-width: 500px;
+    margin-top: 100px;
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-family: 'Roboto Mono', monospace;
+    margin: 30px;
+    text-align: center;
+}
+.selector{
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
+.options-register{
+    width: fit-content;
+    height: 3.625rem;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: var(--color-in-label);
+    border: none;
+}
+.inputs-cointainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+}
+.container-label-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+label,input, button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 52px;
+    background-color: var(--label-inputs);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: var(--color-in-label);
+}
+input{
+    width: 18.9375rem;
+    border: none;
+    text-align: center;
+}
+.buttons{
+    display: flex;
+    gap: 1.875rem;
+    justify-content: center;
+    margin: 40px;
+}
+button{
+    border: none;
+}
+.texto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    height: fit-content;
+    align-items: center;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    color: var(--color-in-label);
+    background-color: var(--back-div-form);
+}
+.green{
+    background-color: green;
+}
+.red{
+    background-color: red;
+}
+.yellow{
+    background-color: yellow;
+}
+#glucosaInputs,#presionInputs  {
+    display: none;
+}
+.hide{
+    display: none;
+}

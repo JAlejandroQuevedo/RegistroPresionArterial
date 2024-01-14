@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Registro de salud</title>
+</head>
+<body>
+    <section class="container">
+        <div class="titulo">
+            <h1 id="titulo">Registro de salud</h1>
+        </div>
+        <div class="selector">
+            <select id="selector" class="options-register">
+                <option value="selector" selected>Selecciona tu registro</option>
+                <option value="glucosa">Glucosa</option>
+                <option value="presion">Presión Arterial</option>
+            </select>
+        </div>
+        <section id="inputs-cointainer" class="inputs-cointainer">
+            <div id="glucosaInputs" class="container-label-inputs"></div>
+            <div id="presionInputs" class="container-label-inputs"></div>    
+        </section>
+        <section id="buttons" class="buttons">
+            <button id="buttonEntrada">Agregar Entrada</button>
+            <button id="buttonMostrar">Mostrar Registros</button>
+        </section>
+    
+        <div id="resultados" class="texto">
+            <p id="texto">Nota: Si tu cifra de glucosa es anormal, se te alertará</p>
+        </div>
+    </section>
+    <script src="./js/index.js"></script>
+</body>
