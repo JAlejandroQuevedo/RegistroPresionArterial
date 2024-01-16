@@ -8,19 +8,14 @@ const buttonMostrar = document.getElementById('buttonMostrar');
 const resultadosContainer = document.getElementById('resultados');
 const texto = document.getElementById('texto');
 const buttonsContainer = document.getElementById('buttons');
+const buttonLimpiarRegistro = document.getElementById('limpiarLocal');
 
-// Asignación de las funcionalidades de los botones y selector
-selector.addEventListener('change', mostrarInputs);
-// Indica si existe algún cambio en el selector, si es así se ejecuta la función mostrarInputs
+//Se desaparecen los botones del html
 buttonsContainer.style.display = 'none';
-buttonEntrada.addEventListener('click', agregarEntrada);
-buttonMostrar.addEventListener('click', mostrarRegistros);
-// Se establece que el contenedor de los botones no estará presente hasta que se diga lo contrario
 
-// Declaración de las funciones
-
-// Función que ejecutará los cambios en el HTML según lo elegido en el selector.
-function mostrarInputs() {
+// Asignación de las funcionalidades de los botones y selector con sus correspondientes funciones
+selector.addEventListener('change', () => {
+    // Función que ejecutará los cambios en el HTML según lo elegido en el selector.
     if (selector.value === 'glucosa') {
         glucosaInputs.style.display = 'flex';
         presionInputs.style.display = 'none';
@@ -34,7 +29,7 @@ function mostrarInputs() {
     } else if (selector.value === 'presion') {
         glucosaInputs.style.display = 'none';
         presionInputs.style.display = 'flex';
-        titulo.innerText = 'Ingresa tu cifra de presion arterial';
+        titulo.innerText = 'Ingresa tu cifra de presión arterial';
         texto.style.display = 'none';
         buttonsContainer.style.display = 'flex';
         presionInputs.innerHTML = `
@@ -47,63 +42,11 @@ function mostrarInputs() {
         glucosaInputs.style.display = 'none';
         presionInputs.style.display = 'none';
         buttonsContainer.style.display = 'none';
+        titulo.innerText = 'Registro de salud';
         texto.style.display = 'flex';
     }
-}
-
-// Función para obtener los valores de los input
-function obtenerValorInput(inputId) {
-    const input = document.getElementById(inputId);
-    return input.value.trim();
-    // trim => Elimina los espacios al principio y al final
-}
-
-// Función para mostrar la alerta en el HTML
-function mostrarAlerta(alerta) {
-    const nuevoElemento = document.createElement('p');
-    nuevoElemento.innerText = alerta;
-    resultadosContainer.appendChild(nuevoElemento);
-}
-
-// Función para evaluar los resultados
-function evaluarResultado(tipo, cifra1, cifra2) {
-    if (tipo === 'glucosa') {
-        if (cifra1 <= 70) {
-            return 'Baja, consume una fruta';
-        } else if (cifra1 >= 70 && cifra1 <= 110) {
-            return 'Normal';
-        } else {
-            return 'Alta, acude al medico';
-            
-        }
-    } else if (tipo === 'presion') {
-        if (cifra1 <= 70 && cifra2 <= 120) {
-            return 'Baja, reposa y luego acude al medico';
-        } else if (cifra1 <= 80 && cifra2 <= 120) {
-            return 'Normal';
-        } else if (cifra1 >= 90 && cifra2 >= 130) {
-            return 'Alta, acude al medico';
-
-        }
-    }
-}
-
-// Función para llevar el registro y guardarlo en el navegador
-function guardarRegistroEnLocalStorage(tipo, fecha, tipoPresion, cifra1, cifra2) {
-    let registrosGuardados = JSON.parse(localStorage.getItem('registros')) || [];
-    const nuevoRegistro = {
-        tipo: tipo,
-        fecha: fecha,
-        tipoPresion: tipoPresion,
-        cifra1: cifra1,
-        cifra2: cifra2
-    };
-    registrosGuardados.push(nuevoRegistro);
-    localStorage.setItem('registros', JSON.stringify(registrosGuardados));
-}
-
-// Función para agregar la entrada del usuario y mostrar el mensaje
-function agregarEntrada() {
+});
+buttonEntrada.addEventListener('click', () => {
     const fechaActual = new Date();
     const fechaHora = fechaActual.toLocaleString();
     const tipo = selector.value;
@@ -131,10 +74,9 @@ function agregarEntrada() {
             );
         }
     }
-}
+});
 
-// Función para mostrar los registros que han sido guardados en el navegador al usuario
-function mostrarRegistros() {
+buttonMostrar.addEventListener('click', () => {
     const registrosLocal = JSON.parse(localStorage.getItem('registros')) || [];
     resultadosContainer.innerHTML = '';
 
@@ -152,4 +94,58 @@ function mostrarRegistros() {
 
         resultadosContainer.appendChild(elementoHTML);
     });
+});
+
+buttonLimpiarRegistro.addEventListener('click', () => {
+    //Funcion que limpiara los registros del local storage.
+    resultadosContainer.innerHTML = '';
+    localStorage.removeItem('registros');
+});
+
+//Declaracion de funciones fuera de los botones con eventos
+
+// Función para obtener los valores de los input
+function obtenerValorInput(inputId) {
+    const input = document.getElementById(inputId);
+    return input.value.trim();
+}
+
+// Función para mostrar la alerta en el HTML
+function mostrarAlerta(alerta) {
+    const nuevoElemento = document.createElement('p');
+    nuevoElemento.innerText = alerta;
+    resultadosContainer.appendChild(nuevoElemento);
+}
+
+function evaluarResultado(tipo, cifra1, cifra2) {
+    if (tipo === 'glucosa') {
+        if (cifra1 <= 70) {
+            return 'Baja, consume una fruta';
+        } else if (cifra1 >= 70 && cifra1 <= 110) {
+            return 'Normal';
+        } else {
+            return 'Alta, acude al médico';
+        }
+    } else if (tipo === 'presion') {
+        if (cifra1 <= 70 && cifra2 <= 120) {
+            return 'Baja, reposa y luego acude al médico';
+        } else if (cifra1 <= 80 && cifra2 <= 120) {
+            return 'Normal';
+        } else if (cifra1 >= 90 && cifra2 >= 130) {
+            return 'Alta, acude al médico';
+        }
+    }
+}
+
+function guardarRegistroEnLocalStorage(tipo, fecha, tipoPresion, cifra1, cifra2) {
+    let registrosGuardados = JSON.parse(localStorage.getItem('registros')) || [];
+    const nuevoRegistro = {
+        tipo: tipo,
+        fecha: fecha,
+        tipoPresion: tipoPresion,
+        cifra1: cifra1,
+        cifra2: cifra2
+    };
+    registrosGuardados.push(nuevoRegistro);
+    localStorage.setItem('registros', JSON.stringify(registrosGuardados));
 }

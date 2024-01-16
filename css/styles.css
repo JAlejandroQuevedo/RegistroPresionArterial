@@ -17,7 +17,6 @@ body{
     align-items: center;
     height: 100vh;
     background-color:var(--background);
-    font-family: 'Roboto Mono', monospace;
     font-size: 1.25rem;
     color: var(--color);
     margin: 30px;
@@ -34,9 +33,12 @@ body{
     display: flex;
     justify-content: center;
     font-size: 14px;
-    font-family: 'Roboto Mono', monospace;
     margin: 30px;
     text-align: center;
+}
+h1{
+    font-family: 'Salsa', cursive;
+    font-size: 1.875rem;
 }
 .selector{
     display: flex;
@@ -46,6 +48,7 @@ body{
 .options-register{
     width: fit-content;
     height: 3.625rem;
+    font-family: 'Salsa', cursive;
     font-size: 16px;
     text-align: center;
     border-radius: 20px;
@@ -68,6 +71,8 @@ body{
 label,input, button{
     display: flex;
     justify-content: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.25rem;
     align-items: center;
     width: fit-content;
     height: 52px;
@@ -105,6 +110,10 @@ button{
     font-size: 15px;
     color: var(--color-in-label);
     background-color: var(--back-div-form);
+}
+p{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.25rem;
 }
 .green{
     background-color: green;
