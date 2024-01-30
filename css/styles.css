@@ -1,10 +1,5 @@
 :root{
-    --background: #535050;
     --color: black;
-    --back-div: #C9C7C7;
-    --back-div-form: #8D7878;
-    --label-inputs: #5F5B5B;
-    --color-in-label: #FFFFFF
 }
 *{
     margin: 0;
@@ -16,13 +11,13 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color:var(--background);
+    background-image: linear-gradient(to right top, #0290e8, #0290e8, #0290e8, #0290e8, #0290e8);;
     font-size: 1.25rem;
     color: var(--color);
     margin: 30px;
 }
 .container{
-    background-color: var(--back-div);
+    background-image: linear-gradient(to top, #eb8266, #ed845c, #ed8652, #ec8947, #ea8d3b);
     width: fit-content;
     height: fit-content;
     border-radius: .625rem;
@@ -32,28 +27,43 @@ body{
 .titulo{
     display: flex;
     justify-content: center;
-    font-size: 14px;
     margin: 30px;
     text-align: center;
 }
 h1{
-    font-family: 'Salsa', cursive;
+    font-family: 'Rubik', sans-serif;
     font-size: 1.875rem;
 }
 .selector{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin: 20px;
 }
 .options-register{
     width: fit-content;
     height: 3.625rem;
-    font-family: 'Salsa', cursive;
+    font-family: 'PT Sans', sans-serif;
     font-size: 16px;
     text-align: center;
     border-radius: 20px;
-    background-color: var(--color-in-label);
+    background-image: linear-gradient(to top, #eb8200, #f08504, #f58708, #fa8a0c, #ff8d10);
     border: none;
+    border: 2px solid white;
+}
+.selector button{
+    width: fit-content;
+    height: 3.625rem;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    color: var(--color);
+    border: 2px solid white;
+}
+a{
+    text-decoration: none;
+    color: var(--color)
 }
 .inputs-cointainer{
     display: flex;
@@ -71,21 +81,25 @@ h1{
 label,input, button{
     display: flex;
     justify-content: center;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'PT Sans', sans-serif;
     font-size: 1.25rem;
     align-items: center;
     width: fit-content;
     height: 52px;
-    background-color: var(--label-inputs);
     border-radius: 10px;
+    background-image: linear-gradient(to top, #eb8200, #f08504, #f58708, #fa8a0c, #ff8d10);
     padding: 10px;
     margin-bottom: 20px;
     color: var(--color-in-label);
+    border: 2px solid white;
+    color: var(--color);
+    font-family: 900;
 }
 input{
     width: 18.9375rem;
     border: none;
     text-align: center;
+    border: 2px solid white;
 }
 .buttons{
     display: flex;
@@ -93,8 +107,10 @@ input{
     justify-content: center;
     margin: 40px;
 }
-button{
-    border: none;
+.buttons button{
+    font-size: 15px;
+    font-family: 'Rubik', sans-serif;
+    color: #f3f3f3f3;
 }
 .texto{
     display: flex;
@@ -108,11 +124,11 @@ button{
     margin: 20px;
     border-radius: 20px;
     font-size: 15px;
-    color: var(--color-in-label);
-    background-color: var(--back-div-form);
+    color: var(--color);
+    background-color: #FF8D10;
 }
 p{
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'PT Sans', sans-serif;;
     font-size: 1.25rem;
 }
 .green{
@@ -130,3 +146,15 @@ p{
 .hide{
     display: none;
 }
+button:hover{
+    border: 2px solid #3FF242;
+}
+
+input:focus{
+    border-color: #0290e8;
+    outline: none;
+}
+
+
+
+

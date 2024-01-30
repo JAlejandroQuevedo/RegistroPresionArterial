@@ -1,0 +1,27 @@
+/* Api */
+#characters-container{
+    display: flex;
+    gap: 30px;
+}
+#characters-container h2{
+    font-family: 'Rubik', sans-serif;
+}
+#characters-container div{
+    width: 25rem;
+    text-align: center;
+    border-radius:10px;
+    box-shadow: 2px 2px 2px #3A00E0;
+    border: 1px solid #949494;
+    padding: 10px;
+
+}
+
+#characters-container img{
+    width: 18.75rem;
+    height: 18.75rem;
+    object-fit: contain;
+}
+#characters-container p{
+    font-family: 'PT Sans', sans-serif;
+    text-align: justify;
+}
