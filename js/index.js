@@ -9,6 +9,7 @@ const resultadosContainer = document.getElementById('resultados');
 const texto = document.getElementById('texto');
 const buttonsContainer = document.getElementById('buttons');
 const buttonLimpiarRegistro = document.getElementById('limpiarLocal');
+const clean = document.getElementById('clean');
 
 //Se desaparecen los botones del html
 buttonsContainer.style.display = 'none';
@@ -39,18 +40,27 @@ selector.addEventListener('change', () => {
             <input type="number" id="sistolica">
         `;
     } else {
-        glucosaInputs.style.display = 'none';
-        presionInputs.style.display = 'none';
-        buttonsContainer.style.display = 'none';
-        titulo.innerText = 'Registro de salud';
-        texto.style.display = 'flex';
+        location.reload();
     }
 });
 buttonEntrada.addEventListener('click', () => {
     const fechaActual = new Date();
     const fechaHora = fechaActual.toLocaleString();
     const tipo = selector.value;
+    Toastify({
+        text:"Cifra agregada con exito",
+        duration:2000,
+        position:"right",
+        gravity:"top",
+        style:{
+            background:"#E89302",
+            color: "black",
+            "border-radius": "10px",
+            "font-family": "'PT Sans', sans-serif",
+            "box-shadow": "none",
+        }
 
+    }).showToast()
     if (tipo === 'glucosa' || tipo === 'presion') {
         const cifra1 = obtenerValorInput(tipo === 'glucosa' ? 'glucosa' : 'diastolica');
         const cifra2 = tipo === 'presion' ? obtenerValorInput('sistolica') : '';
@@ -58,7 +68,6 @@ buttonEntrada.addEventListener('click', () => {
         if (cifra1 !== '' && (tipo !== 'presion' || cifra2 !== '')) {
             const resultado = evaluarResultado(tipo, cifra1, cifra2);
             let mensajeUsuario = '';
-
             if (tipo === 'glucosa') {
                 mensajeUsuario = `Tu cifra de glucosa fue: ${cifra1} (${resultado})`;
             } else if (tipo === 'presion') {
@@ -72,14 +81,58 @@ buttonEntrada.addEventListener('click', () => {
                 `Cifra: ${cifra1}`,
                 tipo === 'presion' ? `Cifra: ${cifra2}` : ''
             );
+            if (tipo === 'glucosa') {
+                if (cifra1 <= 70) {
+                    resultadosContainer.style = `
+                    background-color: #FA990F;  
+                    `;
+                } else if (cifra1 >= 70 && cifra1 <= 110) {
+                    resultadosContainer.style = `
+                    background-color: #2EB70F;
+                    `;
+                } else {
+                    resultadosContainer.style = `
+                    background-color: #F52F0C;
+                    `;
+                }
+            } else if (tipo === 'presion') {
+                if (cifra1 <= 70 && cifra2 <= 100) {
+                    resultadosContainer.style = `
+                    background-color: #FA990F;  
+                    `
+                } else if (cifra1 <= 80 && cifra2 <= 120) {
+                    resultadosContainer.style = `
+                    background-color: #2EB70F;  
+                    `
+                } else if (cifra1 >= 90 && cifra2 >= 130) {
+                    resultadosContainer.style = `
+                    background-color: #F52F0C;
+                    `;
+                }
         }
     }
-});
+}});
 
 buttonMostrar.addEventListener('click', () => {
+    Toastify({
+        text:"Mostrando registro",
+        duration:2000,
+        position:"right",
+        gravity:"top",
+        style:{
+            background:"#3FF2BB",
+            color: "black",
+            "border-radius": "10px",
+            "font-family": "'PT Sans', sans-serif",
+            "box-shadow": "none",
+        }
+
+    }).showToast()
     const registrosLocal = JSON.parse(localStorage.getItem('registros')) || [];
     resultadosContainer.innerHTML = '';
-
+    resultadosContainer.style = `{
+        background-color: #3FF2BB;
+    }`
     registrosLocal.forEach(registro => {
         let elementoHTML;
 
@@ -100,6 +153,23 @@ buttonLimpiarRegistro.addEventListener('click', () => {
     //Funcion que limpiara los registros del local storage.
     resultadosContainer.innerHTML = '';
     localStorage.removeItem('registros');
+    resultadosContainer.style = `{
+        background-color: var(--back-div-form);
+    }`
+    Toastify({
+        text:"Registro limpiado con éxito",
+        duration:2000,
+        position:"right",
+        gravity:"top",
+        style:{
+            background:"#F5271D",
+            color: "white",
+            "border-radius": "10px",
+            "font-family": "'PT Sans', sans-serif",
+            "box-shadow": "none",
+        }
+
+    }).showToast()
 });
 
 //Declaracion de funciones fuera de los botones con eventos
@@ -120,19 +190,19 @@ function mostrarAlerta(alerta) {
 function evaluarResultado(tipo, cifra1, cifra2) {
     if (tipo === 'glucosa') {
         if (cifra1 <= 70) {
-            return 'Baja, consume una fruta';
+            return 'Es algo baja, consume una fruta';
         } else if (cifra1 >= 70 && cifra1 <= 110) {
-            return 'Normal';
+            return 'Es normal, ¡Sigue así!';
         } else {
-            return 'Alta, acude al médico';
+            return 'Esta demasiado alta, ¡acude al médico!';
         }
     } else if (tipo === 'presion') {
         if (cifra1 <= 70 && cifra2 <= 120) {
             return 'Baja, reposa y luego acude al médico';
         } else if (cifra1 <= 80 && cifra2 <= 120) {
-            return 'Normal';
+            return 'Es normal, ¡Sigue así!';
         } else if (cifra1 >= 90 && cifra2 >= 130) {
-            return 'Alta, acude al médico';
+            return 'Esta demasiado alta, ¡acude al médico!';
         }
     }
 }
@@ -149,3 +219,24 @@ function guardarRegistroEnLocalStorage(tipo, fecha, tipoPresion, cifra1, cifra2)
     registrosGuardados.push(nuevoRegistro);
     localStorage.setItem('registros', JSON.stringify(registrosGuardados));
 }
+
+clean.addEventListener('click', ()=>{
+    location.reload()
+}) 
+
+//Nota inicio con dinamnismo asincronico
+
+const mensajeNota = 'Nota: Si tu parametro de salud es anormal, se te alertará';
+
+let indice = 0
+
+const mostrarLetra = ()=>{
+    texto.textContent += mensajeNota[indice];
+    indice++;
+
+    if(indice < mensajeNota.length){
+        setTimeout(mostrarLetra, 50)
+    }
+}
+
+setTimeout(mostrarLetra,50);

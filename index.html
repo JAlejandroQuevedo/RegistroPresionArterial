@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Registro de salud</title>
 </head>
 <body>
     <section class="container">
         <div class="titulo">
-            <h1 id="titulo">Registro de salud</h1>
+            <h1 id="titulo">Registro de salud &#x1F3E5;</h1>
         </div>
         <div class="selector">
+            <button id="cards"><a href="./pages/cards.html">Cards</a></button>
             <select id="selector" class="options-register">
                 <option value="selector" selected>Selecciona tu registro</option>
                 <option value="glucosa">Glucosa</option>
@@ -32,11 +34,13 @@
             <button id="buttonEntrada">Agregar Entrada</button>
             <button id="buttonMostrar">Mostrar Registros</button>
             <button id="limpiarLocal">Limpiar Registro</button>
+            <button id="clean">Recargar</button>
         </section>
     
         <div id="resultados" class="texto">
-            <p id="texto">Nota: Si tu parametro de salud es anormal, se te alertará</p>
+            <p id="texto"></p>
         </div>
     </section>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="./js/index.js"></script>
 </body>
